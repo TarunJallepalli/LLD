@@ -4,8 +4,16 @@ public class Player {
 
     char ch;
     int id;
-    String Name;
-    PlayerType type;
+    String name;
+    PlayerType playerType;
+
+    public Player(char ch, int id, String name, PlayerType playerType) {
+        
+        this.ch = ch;
+        this.id = id;
+        this.name = name;
+        this.playerType = playerType;
+    }
 
     public char getCh() {
         return ch;
@@ -24,19 +32,19 @@ public class Player {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public PlayerType getType() {
-        return type;
+        return playerType;
     }
 
-    public void setType(PlayerType type) {
-        this.type = type;
+    public void setType(PlayerType playerType) {
+        this.playerType = playerType;
     }
 
 }

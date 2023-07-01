@@ -19,10 +19,10 @@ public class Game {
     private List<WinningStrategy> winningStrategies;
     private int nextPlayerToMoveIdx;
 
-    private Game(List<Player> players, List<WinningStrategy> winningStrategies) {
+    private Game(int boardDimension, List<Player> players, List<WinningStrategy> winningStrategies) {
 
         this.players = players;
-        this.board = new Board();
+        this.board = new Board(boardDimension);
         this.moves = new ArrayList<>();
         this.gameState = GameState.IN_PROGRESS;
         this.winningStrategies = winningStrategies;
@@ -85,7 +85,7 @@ public class Game {
         public Game build() throws PlayerCountMisMatchException, BotCountMisMatchException, CharacterCountMisMatchException {
 
             validate(boardDimension, players);
-            return new Game(this.players, this.winningStrategies);
+            return new Game(boardDimension, this.players, this.winningStrategies);
         }
     }
 

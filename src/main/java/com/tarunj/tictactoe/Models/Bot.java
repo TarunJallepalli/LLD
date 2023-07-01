@@ -2,13 +2,19 @@ package com.tarunj.tictactoe.Models;
 
 public class Bot extends Player{
     
-    BotDifficultyLevel difficultyLevel;
+    BotDifficultyLevel botDifficultyLevel;
 
-    public BotDifficultyLevel getDifficultyLevel() {
-        return difficultyLevel;
+    public Bot(char ch, int id, String name, PlayerType playerType, BotDifficultyLevel botDifficultyLevel) {
+
+        super(ch, id, name, PlayerType.BOT);
+        this.botDifficultyLevel = botDifficultyLevel;
     }
 
-    public void setDifficultyLevel(BotDifficultyLevel difficultyLevel) {
-        this.difficultyLevel = difficultyLevel;
+    public BotDifficultyLevel getbotDifficultyLevel() {
+        return botDifficultyLevel;
+    }
+
+    public void setDifficultyLevel(BotDifficultyLevel botDifficultyLevel) {
+        this.botDifficultyLevel = botDifficultyLevel;
     }
 }

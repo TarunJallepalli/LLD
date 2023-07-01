@@ -1,11 +1,26 @@
 package com.tarunj.tictactoe.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
 
     int size;
     List<List<Cell>> board;
+
+    public Board(int boardDimension) {
+
+        size = boardDimension;
+        board = new ArrayList<>();
+
+        for(int i = 0; i < boardDimension; i++) {
+            
+            board.add(new ArrayList<Cell>());
+            
+            for(int j = 0; j < boardDimension; j++)
+                board.get(i).add(new Cell(i, j));    
+        }
+    }
 
     public int getSize() {
         return size;
