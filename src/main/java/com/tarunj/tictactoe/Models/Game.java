@@ -152,10 +152,16 @@ public class Game {
     public void makeMove() {
 
         Player currPlayer = players.get(nextPlayerToMoveIdx);
+        System.out.println("This is " + currPlayer.getName() + "'s turn to move.");
+
         Move moveMade = currPlayer.makeMove(board);
         int row = moveMade.getCell().getRow(), col = moveMade.getCell().getCol();
 
-        if(!validateMove(row, col)) return ;
+        if(!validateMove(row, col)) {
+            
+            System.out.println("Please enter a valid move");
+            return ;
+        }
 
         Cell currCell = board.getBoard().get(row).get(col);
         currCell.setPlayer(currPlayer);

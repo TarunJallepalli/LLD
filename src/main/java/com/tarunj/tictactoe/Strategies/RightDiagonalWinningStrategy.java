@@ -17,7 +17,7 @@ public class RightDiagonalWinningStrategy implements WinningStrategy{
         int col = move.getCell().getCol();
         char playerChar = move.getPlayer().getCh();
 
-        if(row + col != board.getSize()) return false;
+        if(row + col != board.getSize() - 1) return false;
 
         if(!rightDiagMap.containsKey(playerChar)) rightDiagMap.put(playerChar, 0);
             rightDiagMap.put(playerChar, rightDiagMap.get(playerChar) + 1);

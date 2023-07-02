@@ -47,8 +47,10 @@ public class Board {
                 if(cell.getCellState().equals(CellState.EMPTY))
                     System.out.print("| _ | ");
                 
-                else System.out.println("| " + cell.getPlayer().getCh() + " | ");
+                else System.out.print("| " + cell.getPlayer().getCh() + " | ");
             }
+
+            System.out.println('\n');
         }
     }
 

@@ -50,6 +50,8 @@ public class App
                 gameController.makeMove(game);
             }
 
+            gameController.printBoard(game);
+
             if(gameController.getGameState(game).equals(GameState.WON))
                 System.out.println(gameController.getWinner(game) + " has won the game");
             

@@ -55,8 +55,6 @@ public class Player {
 
         int row = -1, col = -1;
 
-        System.out.println("This is " + name + "'s turn to move.");
-
         System.out.println("Enter the row you want to move :");
         row = sc.nextInt();
         
