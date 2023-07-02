@@ -1,11 +1,14 @@
 package com.tarunj.tictactoe.Models;
 
+import java.util.Scanner;
+
 public class Player {
 
     char ch;
     int id;
     String name;
     PlayerType playerType;
+    Scanner sc;
 
     public Player(char ch, int id, String name, PlayerType playerType) {
         
@@ -13,6 +16,7 @@ public class Player {
         this.id = id;
         this.name = name;
         this.playerType = playerType;
+        sc = new Scanner(System.in);
     }
 
     public char getCh() {
@@ -45,6 +49,21 @@ public class Player {
 
     public void setType(PlayerType playerType) {
         this.playerType = playerType;
+    }
+
+    public Move makeMove(Board board) {
+
+        int row = -1, col = -1;
+
+        System.out.println("This is " + name + "'s turn to move.");
+
+        System.out.println("Enter the row you want to move :");
+        row = sc.nextInt();
+        
+        System.out.println("Enter the col you want to move :");
+        col = sc.nextInt();
+
+        return new Move(new Cell(row, col), this);
     }
 
 }

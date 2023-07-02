@@ -145,4 +145,51 @@ public class Game {
         this.nextPlayerToMoveIdx = nextPlayerToMoveIdx;
     }
 
+    public void printBoard() {
+        board.printBoard();
+    }
+
+    public void makeMove() {
+
+        Player currPlayer = players.get(nextPlayerToMoveIdx);
+        Move moveMade = currPlayer.makeMove(board);
+        int row = moveMade.getCell().getRow(), col = moveMade.getCell().getCol();
+
+        if(!validateMove(row, col)) return ;
+
+        Cell currCell = board.getBoard().get(row).get(col);
+        currCell.player = currPlayer;
+        currCell.cellState = CellState.FILLED;
+
+        Move move = new Move(currCell, currPlayer); 
+        moves.add(move);
+        nextPlayerToMoveIdx = (nextPlayerToMoveIdx + 1) % players.size();
+
+        checkGameState(move);
+    }
+
+    private void checkGameState(Move move) {
+
+        for(WinningStrategy winningStrategy : winningStrategies) {
+
+            if(winningStrategy.checkWinner(board, move)) {
+
+                setGameState(GameState.WON);
+                setWinner(move.getPlayer());
+                return ;
+            }
+        }
+
+        if(moves.size() == board.getSize() * board.getSize())
+            setGameState(GameState.DRAWN);
+    }
+
+    private boolean validateMove(int row, int col) {
+
+        if(row >= board.getSize() || row < 0) return false;
+        if(col >= board.getSize() || col < 0) return false;
+
+        return (board.getBoard().get(row).get(col)).getCellState().equals(CellState.EMPTY);
+    }
+
 }

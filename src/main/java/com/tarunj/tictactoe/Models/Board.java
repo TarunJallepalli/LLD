@@ -38,4 +38,18 @@ public class Board {
         this.board = board;
     }
 
+    public void printBoard() {
+
+        for(List<Cell> row : board) {
+
+            for(Cell cell : row) {
+
+                if(cell.getCellState().equals(CellState.EMPTY))
+                    System.out.print("| _ | ");
+                
+                else System.out.println("| " + cell.getPlayer().getCh() + " | ");
+            }
+        }
+    }
+
 }

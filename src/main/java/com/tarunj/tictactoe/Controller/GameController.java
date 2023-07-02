@@ -19,12 +19,12 @@ public class GameController {
 
     public void makeMove (Game game) {
 
-        
+        game.makeMove();
     }
 
     public void printBoard(Game game) {
 
-
+        game.printBoard();
     }
 
     public void undoMove(Game game) {
@@ -34,12 +34,12 @@ public class GameController {
 
     public void getGameState(Game game) {
 
-
+        game.getGameState();
     }
     
-    public void winner(Game gasme) {
+    public void getWinner(Game game) {
 
-
+        game.getWinner();
     }
 
 }
