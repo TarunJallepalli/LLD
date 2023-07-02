@@ -24,4 +24,15 @@ public class ColumnWinningStrategy implements WinningStrategy{
 
         return (colMap.get(playerChar).equals(board.getSize()));
     }
+
+    @Override
+    public void handleMoveUndo(Board board, Move move) {
+        
+        int col = move.getCell().getCol();
+        char playerChar = move.getPlayer().getCh();
+
+        HashMap<Character, Integer> colMap = colCount.get(col); 
+
+        colMap.put(playerChar, colMap.get(playerChar) - 1);
+    }
 }

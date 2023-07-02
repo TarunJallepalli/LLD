@@ -198,4 +198,28 @@ public class Game {
         return (board.getBoard().get(row).get(col)).getCellState().equals(CellState.EMPTY);
     }
 
+    public void undoMove() {
+
+        if(moves.isEmpty()) {
+
+            System.out.println("No move to do undo");
+            return ;
+        }
+
+        Move lastMove = moves.get(moves.size()-1);
+        moves.remove(moves.size()-1);
+
+        Cell cell = lastMove.getCell();
+        cell.setPlayer(null);
+        cell.setCellState(CellState.EMPTY);
+
+        for(WinningStrategy winningStrategy : winningStrategies) {
+
+            winningStrategy.handleMoveUndo(board, lastMove);
+        }
+
+        nextPlayerToMoveIdx -= 1;
+        nextPlayerToMoveIdx = (nextPlayerToMoveIdx + players.size())%(players.size());
+    }
+
 }

@@ -24,4 +24,14 @@ public class LeftDiagonalWinningStrategy implements WinningStrategy{
 
         return (leftDiagMap.get(playerChar).equals(board.getSize()));
     }
+
+    @Override
+    public void handleMoveUndo(Board board, Move move) {
+        
+        int row = move.getCell().getRow(), col = move.getCell().getCol();
+        char playerChar = move.getPlayer().getCh();
+
+        if(row == col)
+            leftDiagMap.put(playerChar, leftDiagMap.get(playerChar) - 1);
+    }
 }

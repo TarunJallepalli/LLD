@@ -30,7 +30,7 @@ public class GameController {
 
     public void undoMove(Game game) {
 
-
+        game.undoMove();
     }
 
     public GameState getGameState(Game game) {

@@ -24,4 +24,15 @@ public class RowWinningStrategy implements WinningStrategy{
 
         return (rowMap.get(playerChar).equals(board.getSize()));
     }
+
+    @Override
+    public void handleMoveUndo(Board board, Move move) {
+        
+        int row = move.getCell().getRow();
+        char playerChar = move.getPlayer().getCh();
+
+        HashMap<Character, Integer> rowMap = rowCount.get(row); 
+
+        rowMap.put(playerChar, rowMap.get(playerChar) - 1);
+    }
 }

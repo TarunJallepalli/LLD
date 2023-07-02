@@ -2,6 +2,7 @@ package com.tarunj.tictactoe;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.tarunj.tictactoe.Controller.GameController;
 import com.tarunj.tictactoe.Models.Bot;
@@ -25,9 +26,8 @@ public class App
     public static void main( String[] args )
     {
         GameController gameController = new GameController();
-        //Scanner sc = new Scanner(System.in);
         
-        try {
+        try (Scanner sc = new Scanner(System.in)){
 
             List<Player> players = new ArrayList<>();
             players.add(new Player('x', 0, new String("Tarun"), PlayerType.HUMAN));
@@ -47,7 +47,14 @@ public class App
 
                 gameController.printBoard(game);
 
-                gameController.makeMove(game);
+                System.out.println("Does Anyone want to undo a move (y/n)");
+                String undoKey = new String(sc.next());
+
+                if(undoKey.equalsIgnoreCase("y"))   
+                    gameController.undoMove(game);
+            
+                else    
+                    gameController.makeMove(game);
             }
 
             gameController.printBoard(game);
