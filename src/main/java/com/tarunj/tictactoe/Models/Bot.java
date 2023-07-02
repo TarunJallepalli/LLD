@@ -5,8 +5,8 @@ import com.tarunj.tictactoe.Strategies.BotPlayingStrategy;
 
 public class Bot extends Player{
     
-    BotDifficultyLevel botDifficultyLevel;
-    BotPlayingStrategy botPlayingStrategy;
+    private BotDifficultyLevel botDifficultyLevel;
+    private BotPlayingStrategy botPlayingStrategy;
 
     public Bot(char ch, int id, String name, BotDifficultyLevel botDifficultyLevel) {
 

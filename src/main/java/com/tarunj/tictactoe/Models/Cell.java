@@ -2,9 +2,9 @@ package com.tarunj.tictactoe.Models;
 
 public class Cell {
 
-    int row, col;
-    CellState cellState;
-    Player player;
+    private int row, col;
+    private CellState cellState;
+    private Player player;
 
     public Cell(int row, int col) {
 

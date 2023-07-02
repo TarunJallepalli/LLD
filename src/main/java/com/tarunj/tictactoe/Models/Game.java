@@ -158,8 +158,8 @@ public class Game {
         if(!validateMove(row, col)) return ;
 
         Cell currCell = board.getBoard().get(row).get(col);
-        currCell.player = currPlayer;
-        currCell.cellState = CellState.FILLED;
+        currCell.setPlayer(currPlayer);
+        currCell.setCellState(CellState.FILLED);
 
         Move move = new Move(currCell, currPlayer); 
         moves.add(move);

@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Board {
 
-    int size;
-    List<List<Cell>> board;
+    private int size;
+    private List<List<Cell>> board;
 
     public Board(int boardDimension) {
 

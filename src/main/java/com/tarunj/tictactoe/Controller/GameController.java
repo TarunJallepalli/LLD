@@ -6,6 +6,7 @@ import com.tarunj.tictactoe.Exceptions.BotCountMisMatchException;
 import com.tarunj.tictactoe.Exceptions.CharacterCountMisMatchException;
 import com.tarunj.tictactoe.Exceptions.PlayerCountMisMatchException;
 import com.tarunj.tictactoe.Models.Game;
+import com.tarunj.tictactoe.Models.GameState;
 import com.tarunj.tictactoe.Models.Player;
 import com.tarunj.tictactoe.Strategies.WinningStrategy;
 
@@ -32,14 +33,14 @@ public class GameController {
 
     }
 
-    public void getGameState(Game game) {
+    public GameState getGameState(Game game) {
 
-        game.getGameState();
+        return game.getGameState();
     }
     
-    public void getWinner(Game game) {
+    public String getWinner(Game game) {
 
-        game.getWinner();
+        return game.getWinner().getName();
     }
 
 }

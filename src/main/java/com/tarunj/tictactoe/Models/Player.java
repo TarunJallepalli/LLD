@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Player {
 
-    char ch;
-    int id;
-    String name;
-    PlayerType playerType;
-    Scanner sc;
+    private char ch;
+    private int id;
+    private String name;
+    private PlayerType playerType;
+    private Scanner sc;
 
     public Player(char ch, int id, String name, PlayerType playerType) {
         
