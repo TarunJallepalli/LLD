@@ -6,6 +6,7 @@ import java.util.List;
 import com.tarunj.PropertyHunt.enums.ListingType;
 import com.tarunj.PropertyHunt.enums.RoomType;
 import com.tarunj.PropertyHunt.service.PropertyHuntService;
+import com.tarunj.PropertyHunt.service.UserService;
 import com.tarunj.PropertyHunt.strategy.SearchByPrice;
 import com.tarunj.PropertyHunt.strategy.SearchByRooms;
 import com.tarunj.PropertyHunt.strategy.SearchStrategy;
@@ -14,13 +15,14 @@ public class Main {
     
     public static void main(String[] args) {
         
-        PropertyHuntService propertyHuntService = new PropertyHuntService();
+        UserService userService = new UserService();
+        PropertyHuntService propertyHuntService = new PropertyHuntService(userService);
 
         try {
             
-            Long userId1 = propertyHuntService.registerUser("Tarun", "Tarun@gmail.com").getId();
-            Long userId2 = propertyHuntService.registerUser("Varun", "Varun@gmail.com").getId();
-            Long userId3 = propertyHuntService.registerUser("Arun", "Arun@gmail.com").getId();
+            Long userId1 = userService.registerUser("Tarun", "Tarun@gmail.com").getId();
+            Long userId2 = userService.registerUser("Varun", "Varun@gmail.com").getId();
+            Long userId3 = userService.registerUser("Arun", "Arun@gmail.com").getId();
 
             propertyHuntService.listProperty(100L, "T1 Layout", "VZG", 1500.00D, ListingType.SALE, 5, RoomType.TwoBHK, userId1);
             propertyHuntService.listProperty(101L, "T2 Layout", "VZG", 1800.00D, ListingType.SALE, 6, RoomType.TwoBHK, userId1);
