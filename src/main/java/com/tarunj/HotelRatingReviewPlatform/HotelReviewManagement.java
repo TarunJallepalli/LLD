@@ -86,11 +86,11 @@ public class HotelReviewManagement {
 
     public List<String> listHotels() {
 
+
         List<Hotel> hotelList = new ArrayList<>(hotels.values());
         return hotelList.stream().sorted((h1, h2) -> {
-                if(h1.getHotelType().equals(HotelType.PLUS_HOTEL)
-                        && h2.getHotelType().equals(HotelType.PLUS_HOTEL)) {
-                    return Double.compare(h1.getAvgRating(), h2.getAvgRating());
+                if(h1.getHotelType().equals(h2.getHotelType())) {
+                    return Double.compare(h2.getAvgRating(), h1.getAvgRating());
                 }
                 return h1.getHotelType().equals(HotelType.PLUS_HOTEL) ? -1 : 1;
             })

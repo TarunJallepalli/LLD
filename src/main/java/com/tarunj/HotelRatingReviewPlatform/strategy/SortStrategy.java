@@ -17,7 +17,7 @@ public class SortStrategy implements Strategy {
 
         Comparator<Rating> comparator = Comparator.comparingInt(Rating::getRatingValue);
 
-        if("DESC".equalsIgnoreCase(order)) comparator.reversed();
+        if("DESC".equalsIgnoreCase(order)) comparator = comparator.reversed();
 
         return ratings.stream()
                 .sorted(comparator.thenComparing(Rating::getUpdatedAt))

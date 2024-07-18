@@ -8,6 +8,7 @@ import com.tarunj.HotelRatingReviewPlatform.strategy.Strategy;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,8 +21,9 @@ public class Hotel extends BaseModel {
     private HotelType hotelType;
     private Map<Integer, Rating> ratings;
 
-    public Hotel(String name, HotelType hotelType) {
+    public Hotel(int id, String name, HotelType hotelType) {
 
+        super(id);
         this.name = name;
         avgRating = 0;
         this.hotelType = hotelType;
@@ -39,11 +41,13 @@ public class Hotel extends BaseModel {
             avgRating = ((avgRating * ratings.size()) + updatedRating) / ratings.size();
             rating.setRatingValue(ratingValue);
             rating.setReview(review);
+            rating.setUpdatedAt(LocalDateTime.now());
         }
 
         else {
 
             rating = new Rating(Rating.generateId(), ratingValue, review, userId, this.getId());
+            avgRating = ((avgRating * ratings.size()) + ratingValue) / (ratings.size() + 1);
             ratings.put(userId, rating);
         }
 
@@ -52,13 +56,13 @@ public class Hotel extends BaseModel {
 
     @Override
     public String toString() {
-        StringBuilder st = new StringBuilder("[");
-        st.append("id=").append(this.getId()).append("name=")
-          .append(name).append("avgRating=").append(avgRating);
+        StringBuilder st = new StringBuilder("[ ");
+        st.append("id=").append(this.getId()).append(", name=")
+          .append(name).append(", avgRating=").append(avgRating);
         if(hotelType.equals(HotelType.PLUS_HOTEL)) {
-            st.append("Type=").append(hotelType);
+            st.append(", Type=").append(hotelType);
         }
-        st.append("]");
+        st.append(" ]");
         return st.toString();
     }
 

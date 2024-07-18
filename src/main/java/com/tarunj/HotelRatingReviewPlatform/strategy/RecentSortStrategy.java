@@ -10,7 +10,7 @@ public class RecentSortStrategy implements Strategy {
     @Override
     public List<Rating> processList(List<Rating> ratings) {
         return ratings.stream()
-                .sorted(Comparator.comparing(Rating::getUpdatedAt))
+                .sorted(Comparator.comparing(Rating::getUpdatedAt).reversed())
                 .collect(Collectors.toList());
     }
 }

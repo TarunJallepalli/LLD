@@ -3,6 +3,8 @@ package com.tarunj.HotelRatingReviewPlatform.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 public class Rating extends BaseModel {
@@ -23,5 +25,16 @@ public class Rating extends BaseModel {
 
     public static int generateId() {
         return nextId++;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder st = new StringBuilder("[ ");
+        st.append("rating=").append(ratingValue);
+        if(Objects.nonNull(review)) {
+            st.append(", review=").append(review);
+        }
+        st.append(", user=").append(userId).append(" ]");
+        return st.toString();
     }
 }
