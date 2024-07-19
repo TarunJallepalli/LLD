@@ -45,7 +45,10 @@ public class HotelReviewManagement {
 
         Hotel hotel = hotels.get(hotelId);
         Rating rating = hotel.addRating(ratingValue, userId, review);
-        ratings.put(rating.getId(), rating);
+        if(!ratings.containsKey(rating.getId())) {
+            users.get(userId).addRating();
+            ratings.put(rating.getId(), rating);
+        }
 
         return "Rating and Review added Successfully";
     }
