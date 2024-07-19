@@ -5,6 +5,7 @@ import com.tarunj.HotelRatingReviewPlatform.model.HotelType;
 import com.tarunj.HotelRatingReviewPlatform.model.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -80,12 +81,23 @@ public class Application {
 
                 if(parts.length < 2) throw new Exception("Invalid Command");
 
-                String orderType = "", filterType = null;
+                String orderType = "", filterType = null, fileValue = null;
 
                 if(parts.length > 2) orderType = parts[2];
-                if(parts.length > 3) filterType = parts[3];
+                if(parts.length > 3) {
+                    String[] subParts = Arrays.stream(parts[3].split("="))
+                            .toArray(String[]::new);
 
-                management.getHotelRatings(Integer.parseInt(parts[1]), orderType, filterType)
+                    if (subParts.length == 2) {
+                        filterType = subParts[0];
+                        fileValue = subParts[1];
+                    } else {
+                        throw new Exception("Invalid command format");
+                    }
+                }
+
+
+                management.getHotelRatings(Integer.parseInt(parts[1]), orderType, filterType, fileValue)
                           .forEach(System.out::println);
                 break;
             }

@@ -4,26 +4,18 @@ import com.tarunj.HotelRatingReviewPlatform.model.Hotel;
 import com.tarunj.HotelRatingReviewPlatform.model.HotelType;
 import com.tarunj.HotelRatingReviewPlatform.model.Rating;
 import com.tarunj.HotelRatingReviewPlatform.model.User;
-import com.tarunj.HotelRatingReviewPlatform.strategy.FilterRangeStrategy;
-import com.tarunj.HotelRatingReviewPlatform.strategy.RecentSortStrategy;
-import com.tarunj.HotelRatingReviewPlatform.strategy.SortStrategy;
-import com.tarunj.HotelRatingReviewPlatform.strategy.Strategy;
+import com.tarunj.HotelRatingReviewPlatform.strategy.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class HotelReviewManagement {
 
-    private final Map<Integer, User> users;
-    private final Map<Integer, Hotel> hotels;
+    private static final Map<Integer, User> users = new HashMap<>();
+    private static final Map<Integer, Hotel> hotels = new HashMap<>();
+    private static final Map<Integer, Rating> ratings = new HashMap<>();
 
-    private final Map<Integer, Rating> ratings;
-
-    public HotelReviewManagement() {
-        this.users = new HashMap<>();
-        this.hotels = new HashMap<>();
-        this.ratings = new HashMap<>();
-    }
+    public HotelReviewManagement() {}
 
     public void addUsers(List<User> userList) {
         userList.forEach(user -> users.put(user.getId(), user));
@@ -63,7 +55,7 @@ public class HotelReviewManagement {
         return hotel.toString();
     }
 
-    public List<Rating> getHotelRatings(int hotelId, String orderType, String filterType) throws Exception {
+    public List<Rating> getHotelRatings(int hotelId, String orderType, String filterType, String filterValue) throws Exception {
 
         Hotel hotel = hotels.get(hotelId);
         List<Strategy> strategies = new ArrayList<>();
@@ -73,13 +65,20 @@ public class HotelReviewManagement {
         }
 
         if(Objects.nonNull(filterType)) {
-            strategies.add(new FilterRangeStrategy(filterType));
+            Strategy filterStrategy = switch (filterType.toUpperCase()) {
+                case "RANGE" -> new FilterRangeStrategy(filterValue);
+                case "RATING" -> new FilterRatingStrategy(Integer.parseInt(filterValue));
+                case "LEVEL" -> new FilterUserLevelStrategy(Integer.parseInt(filterValue));
+                default -> null;
+            };
+            if(Objects.nonNull(filterStrategy)) strategies.add(filterStrategy);
         }
 
         strategies.add(
                 switch(orderType.toUpperCase()) {
                     case "ASC", "DESC" -> new SortStrategy(orderType.toUpperCase());
                     case "LATEST" -> new RecentSortStrategy();
+                    case "USER_LEVEL" -> new OrderUserLevelStrategy();
                     default -> new SortStrategy("DESC");
                 }
         );
@@ -99,5 +98,9 @@ public class HotelReviewManagement {
             })
             .map(hotel -> "Hotel[id=".concat(String.valueOf(hotel.getId())).concat("]"))
             .collect(Collectors.toList());
+    }
+
+    public static User getUserById(int userId) {
+        return users.get(userId);
     }
 }
